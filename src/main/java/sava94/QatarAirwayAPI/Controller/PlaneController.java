@@ -27,13 +27,13 @@ public class PlaneController {
 	@Autowired
 	private PlaneServices planeServices;
 	
-	//GET .detail show all planes
+	//GET /plane show all planes
 	@GetMapping("/plane")
 	public List<Plane> root() {
 		return planeRepository.findAll();
 	}
 	
-	//GET /detail/{id} show specific plane
+	//GET /plane/{id} show specific plane
 	@GetMapping("/plane/{id}")
 	public ResponseEntity<Plane> getById(@PathVariable String id) {
 		int plane_id = Integer.parseInt(id);
