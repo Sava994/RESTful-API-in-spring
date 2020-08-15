@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,7 +33,7 @@ public class DetailController {
 		return detailRepository.findAll();
 	}
 	
-	//GET /detail/{if} show specific detail
+	//GET /detail/{id} show specific detail
 	@GetMapping("/detail/{id}")
 	public ResponseEntity<Detail> getById(@PathVariable String id) {
 		int detail_id = Integer.parseInt(id);
@@ -70,6 +71,21 @@ public class DetailController {
 		detailRepository.save(detail);
 		
 		return new ResponseEntity<>(detail, HttpStatus.OK);
+	}
+	
+	//DELETE /detail/{id} deletes specific detail
+	@DeleteMapping("/detail/{id}")
+	public ResponseEntity<Boolean> delete(@PathVariable String id) {
+		int detail_id = Integer.parseInt(id);
+		Detail detail = detailServices.getById(detail_id);
+		
+		if(detail == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
+		detailRepository.delete(detail);
+		
+		return new ResponseEntity<>(true, HttpStatus.OK);
 	}
 
 }
