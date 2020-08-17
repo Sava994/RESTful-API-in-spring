@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import sava94.QatarAirwayAPI.Models.Airport;
@@ -19,6 +20,7 @@ import sava94.QatarAirwayAPI.Repository.AirportRepository;
 import sava94.QatarAirwayAPI.Services.AirportServices;
 
 @RestController
+@RequestMapping("qatar_airways")
 public class AirportController {
 	
 	@Autowired
