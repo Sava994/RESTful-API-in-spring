@@ -58,16 +58,16 @@ public class FlightController {
 	@PostMapping("/flight")
 	public Flight create(@RequestBody Map<String, String> body) {
 		String departure_string = body.get("departure");
-		Date departure = new Date();
-		Date arrival = new Date();
+		Date departure = null;
+		Date arrival = null;
 		try {
-			departure = new SimpleDateFormat("YYYY-MM-DD hh:mm:ss").parse(departure_string);
+			departure = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm").parse(departure_string);
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}
 		String departure_arrival = body.get("arrival");
 		try {
-			arrival = new SimpleDateFormat("YYYY-MM-DD hh:mm:ss").parse(departure_arrival);
+			arrival = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm").parse(departure_arrival);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -87,5 +87,4 @@ public class FlightController {
 		return flightRepository.save(new Flight(departure, arrival, airports_id, details_id, 
 				vip_passengers, standard_passengers, planes_id));
 	}
-
 }
